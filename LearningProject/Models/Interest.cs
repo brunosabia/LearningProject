@@ -8,12 +8,14 @@ namespace LearningProject.Models
 {
     public class Interest
     {
+        public int InterestID { get; set; }
         public string Name { get; set; }
 
         public InterestStatus InterestStatus { get; set; }
 
-        public Interest(string name, InterestStatus interestStatus)
+        public Interest(int interestID, string name, InterestStatus interestStatus)
         {
+            InterestID = interestID;
             Name = name;
             InterestStatus = interestStatus;
         }
