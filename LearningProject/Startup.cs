@@ -40,6 +40,7 @@ namespace LearningProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //Seeding the DB
                 seedingService.Seed();
             }
             else
