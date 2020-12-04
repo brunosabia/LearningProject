@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LearningProject.Data;
 using LearningProject.Models;
+using LearningProject.Services;
 
 namespace LearningProject.Controllers
 {
@@ -14,15 +15,23 @@ namespace LearningProject.Controllers
     {
         private readonly LoginContext _context;
 
-        public UsersController(LoginContext context)
+        private UserService _userService;
+
+        public UsersController(LoginContext context,UserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+
+            var list = await _userService.FindAllAsync();
+                
+            return View(list);
+
+            
         }
 
         // GET: Users/Details/5
@@ -146,8 +155,32 @@ namespace LearningProject.Controllers
         }
 
 
+        public async Task<IActionResult> Authenticate(User obj)
+        {
+            if (obj == null)
+            {
+                return NotFound();
+            }
 
-      
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Username == obj.Username && m.Password == obj.Password);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // POST: Users/Authenticate
+        [HttpPost, ActionName("Authenticate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LoginConfirmed(User user)
+        {
+
+            await _userService.AuthenticationAsync(user.Username, user.Password);
+            return RedirectToAction(nameof(Authenticate));
+        }
 
 
         private bool UserExists(int id)

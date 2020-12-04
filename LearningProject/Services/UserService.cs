@@ -29,18 +29,25 @@ namespace LearningProject.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task AuthenticationAsync(User obj)
+        public async Task<User> AuthenticationAsync(string username, string password)
         {
-
-            bool hasAny = await _context.Users.AnyAsync(x => x.Username == obj.Username && x.Password == obj.Password);
+            User u1 = new User(9, username, password);
+            bool hasAny = await _context.Users.AnyAsync(x => x.Username == username && x.Password == password);
             if (!hasAny)
             {
                 throw new Exception("Login Failed");
             }
+
+            else
+            {
+                await _context.SaveChangesAsync();
+                return u1;
+                
+            }
             //try catch aqui
 
             //redireciona para proxima pag
-            await _context.SaveChangesAsync();
+            
 
         }
     }
