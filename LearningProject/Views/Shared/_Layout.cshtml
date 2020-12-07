@@ -1,6 +1,6 @@
-﻿@model LearningProject.Models.ViewModels.UserFormViewModel
-
+﻿@model LearningProject.Models.User
 @{ViewData["Title"] = "Login";
+   
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +34,10 @@
                     </ul>
 
                 </div>
-                <form asp-controller="Home" asp-action="Authenticate"class="form-inline d-md-table-row mt-md-0">
-                    <input asp-for="User.Username" class="form-control" type="text" placeholder="Username" aria-label="Username">
-                    <input asp-for="User.Password" class="form-control" type="text" placeholder="Password" />
+               
+                <form asp-controller="Users" asp-action="Authenticate"class="form-inline d-md-table-row mt-md-0">
+                    <input asp-for="Username" class="form-control" type="text" placeholder="Username" aria-label="Username">
+                    <input asp-for="Password" class="form-control" type="text" placeholder="Password" />
                     <button class="btn btn-outline-success my-5 my-sm-0" type="submit">Login</button>
                 </form>
             </div>

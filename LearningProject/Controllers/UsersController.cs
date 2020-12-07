@@ -155,31 +155,15 @@ namespace LearningProject.Controllers
         }
 
 
-        public async Task<IActionResult> Authenticate(User obj)
-        {
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Username == obj.Username && m.Password == obj.Password);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
+      
         // POST: Users/Authenticate
         [HttpPost, ActionName("Authenticate")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LoginConfirmed(User user)
+        public async Task<IActionResult> Authenticate(User user)
         {
 
             await _userService.AuthenticationAsync(user.Username, user.Password);
-            return RedirectToAction(nameof(Authenticate));
+            return View(user);
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearningProject.Models.enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,10 +11,17 @@ namespace LearningProject.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        
+        [Required(ErrorMessage = "Username is required")]
+        [StringLength(16, ErrorMessage = "Must be between 3 and 16 characters", MinimumLength = 3)]
         public string Username { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Password is required")]
+        [StringLength(10, ErrorMessage = "Must be between 3 and 10 characters", MinimumLength = 3)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public Status Status { get; set; }
 
         public ICollection<Interest> Interests { get; set; } = new List<Interest>();
 
@@ -24,6 +32,7 @@ namespace LearningProject.Models
             Id = id;
             Username = username;
             Password = password;
+            Status = (Status)2;
         }
 
         public void AddInterest( Interest interest)
@@ -36,5 +45,10 @@ namespace LearningProject.Models
             return Interests.OrderBy(x => x.Name).ToList();
         }
 
+        public bool ChangeStatus()
+        {
+            Status = (Status)1;
+            return true;
+        }
     }
 }
