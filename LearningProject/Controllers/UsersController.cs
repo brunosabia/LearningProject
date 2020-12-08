@@ -17,7 +17,7 @@ namespace LearningProject.Controllers
 
         private UserService _userService;
 
-        public UsersController(LoginContext context,UserService userService)
+        public UsersController(LoginContext context, UserService userService)
         {
             _context = context;
             _userService = userService;
@@ -28,10 +28,10 @@ namespace LearningProject.Controllers
         {
 
             var list = await _userService.FindAllAsync();
-                
+
             return View(list);
 
-            
+
         }
 
         // GET: Users/Details/5
@@ -155,7 +155,7 @@ namespace LearningProject.Controllers
         }
 
 
-      
+
         // POST: Users/Authenticate
         [HttpPost, ActionName("Authenticate")]
         [ValidateAntiForgeryToken]
@@ -163,7 +163,15 @@ namespace LearningProject.Controllers
         {
 
             await _userService.AuthenticationAsync(user.Username, user.Password);
-            return View(user);
+            bool stat = user.CheckStatus();
+            if (stat == false)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
 

@@ -21,18 +21,18 @@ namespace LearningProject.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public Status Status { get; set; }
+        public Status Status { get; set; } 
 
         public ICollection<Interest> Interests { get; set; } = new List<Interest>();
 
         public User() { }
 
-        public User(int id, string username, string password)
+        public User(int id, string username, string password, Status status)
         {
             Id = id;
             Username = username;
             Password = password;
-            Status = (Status)2;
+            Status = (Status)0;
         }
 
         public void AddInterest( Interest interest)
@@ -49,6 +49,18 @@ namespace LearningProject.Models
         {
             Status = (Status)1;
             return true;
+        }
+
+        public bool CheckStatus()
+        {
+            if (Status == Status.Online)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

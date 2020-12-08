@@ -7,7 +7,6 @@ namespace LearningProject.Models.ViewModels
 {
     public class UserFormViewModel
     {
-        public User User { get; set; }
-        
+       public ICollection<User> Users { get; set; }
     }
 }

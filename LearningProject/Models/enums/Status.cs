@@ -8,6 +8,6 @@ namespace LearningProject.Models.enums
     public enum Status
     {
         Online = 1,
-        Offline = 2
+        Offline = 0
     }
 }

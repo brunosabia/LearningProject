@@ -31,7 +31,7 @@ namespace LearningProject.Services
 
         public async Task<User> AuthenticationAsync(string username, string password)
         {
-            User u1 = new User(999, username, password);
+            User u1 = new User(999, username, password, Models.enums.Status.Offline);
             bool hasAny = await _context.Users.AnyAsync(x => x.Username == username && x.Password == password);
             if (!hasAny)
             {
@@ -41,9 +41,10 @@ namespace LearningProject.Services
 
             else
             {
-                bool on = u1.ChangeStatus();
+                User u2 = await _context.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
+                u2.ChangeStatus();
                 await _context.SaveChangesAsync();
-                return u1;
+                return u2;
                 
             }
             
