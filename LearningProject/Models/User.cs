@@ -25,6 +25,8 @@ namespace LearningProject.Models
 
         public ICollection<Interest> Interests { get; set; } = new List<Interest>();
 
+       
+
         public User() { }
 
         public User(int id, string username, string password, Status status)
@@ -33,6 +35,7 @@ namespace LearningProject.Models
             Username = username;
             Password = password;
             Status = (Status)0;
+            
         }
 
         public void AddInterest( Interest interest)
@@ -45,10 +48,10 @@ namespace LearningProject.Models
             return Interests.OrderBy(x => x.Name).ToList();
         }
 
-        public bool ChangeStatus()
+        public void ChangeStatus(Status status)
         {
-            Status = (Status)1;
-            return true;
+            Status = status;
+            
         }
 
         public bool CheckStatus()

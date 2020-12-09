@@ -42,7 +42,8 @@ namespace LearningProject.Services
             else
             {
                 User u2 = await _context.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
-                u2.ChangeStatus();
+                u2.ChangeStatus(Models.enums.Status.Online);
+                
                 await _context.SaveChangesAsync();
                 return u2;
                 

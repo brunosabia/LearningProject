@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LearningProject.Data;
 using LearningProject.Models;
 using LearningProject.Services;
+using LearningProject.Models.enums;
 
 namespace LearningProject.Controllers
 {
@@ -28,7 +29,6 @@ namespace LearningProject.Controllers
         {
 
             var list = await _userService.FindAllAsync();
-
             return View(list);
 
 
@@ -162,11 +162,11 @@ namespace LearningProject.Controllers
         public async Task<IActionResult> Authenticate(User user)
         {
 
-            await _userService.AuthenticationAsync(user.Username, user.Password);
+            User us = await _userService.AuthenticationAsync(user.Username, user.Password);
             bool stat = user.CheckStatus();
             if (stat == false)
             {
-                return View(user);
+                return View(us);
             }
             else
             {
