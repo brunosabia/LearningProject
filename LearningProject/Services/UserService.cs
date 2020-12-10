@@ -19,7 +19,7 @@ namespace LearningProject.Services
 
         public async Task<List<User>> FindAllAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.User.ToListAsync();
         }
 
 
@@ -32,7 +32,7 @@ namespace LearningProject.Services
         public async Task<User> AuthenticationAsync(string username, string password)
         {
             User u1 = new User(999, username, password, Models.enums.Status.Offline);
-            bool hasAny = await _context.Users.AnyAsync(x => x.Username == username && x.Password == password);
+            bool hasAny = await _context.User.AnyAsync(x => x.Username == username && x.Password == password);
             if (!hasAny)
             {
                 throw new Exception("Login Failed");
@@ -41,7 +41,7 @@ namespace LearningProject.Services
 
             else
             {
-                User u2 = await _context.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
+                User u2 = await _context.User.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
                 u2.ChangeStatus(Models.enums.Status.Online);
                 
                 await _context.SaveChangesAsync();
@@ -50,6 +50,11 @@ namespace LearningProject.Services
             }
             
 
+        }
+
+        internal Task FirstOrDefaultAsync(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
         }
     }
     }

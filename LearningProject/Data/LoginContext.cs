@@ -14,14 +14,9 @@ namespace LearningProject.Data
 
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Interest> Interests { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Interest> Interest { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().ToTable("User");
-            modelBuilder.Entity<Interest>().ToTable("Interest");
         
-        }
     }
 }

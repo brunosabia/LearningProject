@@ -12,13 +12,13 @@ using LearningProject.Models.enums;
 
 namespace LearningProject.Controllers
 {
-    public class UsersController : Controller
+    public class UserController : Controller
     {
         private readonly LoginContext _context;
 
-        private UserService _userService;
+        private readonly UserService _userService;
 
-        public UsersController(LoginContext context, UserService userService)
+        public UserController(LoginContext context, UserService userService)
         {
             _context = context;
             _userService = userService;
@@ -42,7 +42,7 @@ namespace LearningProject.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var user = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -82,7 +82,7 @@ namespace LearningProject.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.User.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -133,7 +133,7 @@ namespace LearningProject.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var user = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -148,8 +148,8 @@ namespace LearningProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
+            var user = await _context.User.FindAsync(id);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -177,7 +177,7 @@ namespace LearningProject.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }
