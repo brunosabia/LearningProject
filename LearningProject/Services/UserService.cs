@@ -20,6 +20,8 @@ namespace LearningProject.Services
         public async Task<List<User>> FindAllAsync()
         {
             return await _context.User.ToListAsync();
+            //User u1 = new User(12, "danilo", "dandan", Models.enums.Status.Offline);
+            //return u1;
         }
 
 
