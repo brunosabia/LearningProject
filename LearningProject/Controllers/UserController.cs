@@ -161,7 +161,6 @@ namespace LearningProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Authenticate(User user)
         {
-
             User us = await _userService.AuthenticationAsync(user.Username, user.Password);
             bool stat = user.CheckStatus();
             if (stat == false)
@@ -174,6 +173,11 @@ namespace LearningProject.Controllers
             }
         }
 
+        // GET: Users/Create
+        public IActionResult Login()
+        {
+            return View();
+        }
 
         private bool UserExists(int id)
         {
