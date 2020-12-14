@@ -173,7 +173,7 @@ namespace LearningProject.Controllers
             }
         }
 
-        // GET: Users/Create
+        // GET: Users/Login
         public IActionResult Login()
         {
             return View();
