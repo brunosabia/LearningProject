@@ -4,21 +4,24 @@
     ViewData["Title"] = "Users";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary">Create New</a>
+</p>
 
 <table class="table table-striped table-hover">
-    @*
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Username)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Password)
-                </th>
-            </tr>
-        </thead>*@
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+        </tr>
+    </thead>
     <tbody>
         @foreach (var item in Model)
         {
