@@ -45,16 +45,17 @@
 </head>
 <body class="align-content-center">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-8">
             <p>Info about the site</p>
         </div>
         <div class="col-md-4">
 
             <form class="form-signin" asp-controller="User" asp-action="Authenticate">
 
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <h1 class="h3 mb-5 font-weight-normal">Please sign in</h1>
+                <p></p>
                 <label for="inputUser" class="sr-only">Username</label>
-                <input asp-for="Username" id="inputUser" class="form-control" placeholder="Username" required autofocus>
+                <input asp-for="Username" id="inputUser" class="form-control mb-2" placeholder="Username" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <div class="checkbox mb-3">
