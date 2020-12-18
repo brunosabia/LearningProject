@@ -30,6 +30,17 @@ namespace LearningProject
 
             services.AddScoped<SeedingService>();
             services.AddScoped<UserService>();
+            
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews();
 
         }
@@ -54,7 +65,10 @@ namespace LearningProject
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
